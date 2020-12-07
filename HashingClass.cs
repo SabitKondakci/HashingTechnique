@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,9 +11,10 @@ namespace HashingTechniques
     // V value, değeri temsil eder, key değeri long olarak seçildiğinden sadece value değeri Generic tipte oluşturuldu.
     class MyHashingSet<V> 
     {
-        //Chaining Metod örneği, burada örnek olması için linked list kullandım, daha performanslı -->
-        //--> HashSet için BinaryTree,AVLTree,RedBlack Tree gibi yapılar da kullanılabilir.
+        //Separate Chaining Insertion örneği, burada örnek olması için linked list kullandım, daha performanslı -->
+        //--> HashSet için BinarySearchTree,AVLTree,RedBlack Tree gibi yapılar da kullanılabilir.
 
+        //LinkedList array , indeksleri HasIndexGenerator den alınır
         private MySinglyLinkedList<long>[] myHashList;
         public int Size { get; private set; }
         public MyHashingSet(int size)
@@ -24,7 +25,7 @@ namespace HashingTechniques
         private long HashIndexGenerator(long key) //myHashList dizisinin indekslerini oluşturan HashCode üreteci
         {
             int seedKey=Convert.ToInt32(key/2);
-            return (5 * key + new Random(seedKey).Next(76654)) % Size;
+            return (5 * key + new Random(seedKey).Next(7654)) % Size;
         }
         public void AddHashSet(long key, V value)
         {
